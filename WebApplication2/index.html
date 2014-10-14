@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>libros</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+    <body>
+        <form class="form-horizontal" role="form">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="formGroupInputLarge">Buscar: </label>
+                        <div class="col-xs-8">
+                            <input class="form-control" type="text" id="formGroupInputLarge" placeholder="...">
+
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-primary"> Buscar </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> ISBN
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Título
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Páginas
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3"> Uds. vendidas
+                    </label>
+                </div>
+            </div>
+        </form>
+        
+        
+        <!--MODAL-->
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            +
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Nuevo Libro</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label for="isbn">ISBN</label>
+                                <input type="text" class="form-control" id="isbn" placeholder="ISBN">
+                            </div>
+                            <div class="form-group">
+                                <label for="titulo">Título</label>
+                                <input type="text" class="form-control" id="titulo" placeholder="Título">
+                            </div>
+                            <div class="form-group">
+                                <label for="paginas">Páginas</label>
+                                <input type="text" class="form-control" id="paginas" placeholder="Páginas">
+                            </div>
+                            <div class="form-group">
+                                <label for="vendidas">Unidades Vendidas</label>
+                                <input type="text" class="form-control" id="vendidas" placeholder="Unidades Vendidas">
+                            </div>
+
+                            <button type="button" class="btn btn-success" id="guardar">Guardar</button>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--./MODAL-->
+
+
+        <table id="tabla" class="table">
+                <thead>
+                    <tr>
+                        <th>ISBN</th>
+                        <th>Título</th>
+                        <th>Páginas</th>
+                        <th>Uds. vendidas</th>
+                        <th>Eliminar</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>Lista de resultados</td>
+                    </tr>
+                </tfoot>
+                <tbody id="datosCargados">
+                    
+                </tbody>
+            </table>
+        
+       
+                
+
+        <script src="Scripts/jquery-1.9.0.min.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/myScript.js"></script>
+    </body>
+</html>
