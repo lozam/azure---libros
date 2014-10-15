@@ -1,22 +1,26 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-<head>
-    <title>libros</title>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
-</head>
+    <head>
+        <!--, maximun-scale=1, user-scalable=no-->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>libros</title>
+        <link href="Content/bootstrap.css" rel="stylesheet" />
+        <link href="Content/font-awesome.min.css" rel="stylesheet" />
+
+    </head>
     <body>
         <div class="container">
             <h1 class="text-center">Libros</h1>
             <hr/>
             <form class="form-horizontal" role="form">
                 <div class="row">
-                    <div class="col-xs-5 col-xs-offset-7">
+                    <div class="col-xs-12 col-md-6 col-md-offset-6">
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Buscar...">
                                 <span class="input-group-btn">
                                     <button class="btn btn-primary" type="button">
-                                        <span class="glyphicon glyphicon-zoom-in"></span>
+                                        <i class="fa fa-cog fa-lg fa-spin"></i>
                                         Buscar
                                     </button>
                                 </span>
@@ -26,7 +30,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4 col-xs-offset-8">
+                    <div class="col-xs-12 col-md-5 col-md-offset-7 text-center">
                         <label class="radio-inline">
                             <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> ISBN
                         </label>
@@ -77,38 +81,40 @@
                                     <label for="vendidas">Unidades Vendidas</label>
                                     <input type="text" class="form-control" id="vendidas" placeholder="Unidades Vendidas">
                                 </div>
-
-                                <button type="button" class="btn btn-success" id="guardar">Guardar</button>
-
                             </form>
                         </div>
                         <div class="modal-footer bg-primary">
+                            <button type="button" class="btn btn-success" id="guardar">Guardar</button>
                             <button type="button" id="cerrar" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!--./MODAL-->
+            <br /><br />
+            
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
 
+                <table id="tabla" class="table table-hover table-striped">
+                    <thead class="bg-info">
+                        <tr>
+                            <th>ISBN</th>
+                            <th>Título</th>
+                            <th>Páginas</th>
+                            <th>Uds. vendidas</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="bg-info text-center">
+                        <tr>
+                            <td colspan="6">Lista de resultados</td>
+                        </tr>
+                    </tfoot>
+                    <tbody id="datosCargados"></tbody>
+                </table>
+            </div>
 
-            <table id="tabla" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>ISBN</th>
-                        <th>Título</th>
-                        <th>Páginas</th>
-                        <th>Uds. vendidas</th>
-                        <th>Eliminar</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td>Lista de resultados</td>
-                    </tr>
-                </tfoot>
-                <tbody id="datosCargados"></tbody>
-            </table>
         </div>
        
                 
