@@ -25,14 +25,16 @@ var cargarDatos = function (datos) {
     // $("#datosCargados").append("<table id='tablaDatos'></table>");
     //$("#datosCargados").remove();
     $("#datosCargados").empty();
+
     $.each(datos, function (i, dato) {
         var fila = "<tr>";
         fila += "<td>" + dato.isbn + "</td>";
         fila += "<td>" + dato.titulo + "</td>";
         fila += "<td>" + dato.paginas + "</td>";
         fila += "<td>" + dato.unidades + "</td>";
-        fila += "<td><button id=" + dato.id + " onclick='editar(this)'> Editar </button></td>";
-        fila += "<td><button data-eliminar=" + dato.id + " onclick='borrar(this)'> Eliminar </button></td>";
+        fila += "<td><button class='btn btn-info btn-xs' data-editar=" + dato.id + " onclick='editar(this)'> Editar </button>";
+        fila += "<button class='btn btn-info btn-xs' id=" + dato.id + " onclick='confirmarDatos(this)' style='display:none'> Confirmar </button></td>";
+        fila += "<td><button class='btn btn-warning btn-xs' data-eliminar=" + dato.id + " onclick='borrar(this)'> Eliminar </button></td>";
         fila += "</tr>";
         $("#datosCargados").append(fila);
 
@@ -106,11 +108,50 @@ var escribirDatos = function () {
 
 };
 
+
+var editar = function (evt) {
+
+    leer();
+
+    
+    
+   
+
+    var idelemento = evt.getAttribute("data-editar");
+    
+    $("#" + idelemento).css("display", "block");
+
+    //$(evt).html("&nbsp;&nbsp;<span class='glyphicon glyphicon-cloud-upload'></span>&nbsp;&nbsp;");
+    //var idelemento3 = evt.parentNode.parentNode;
+    //console.log(idelemento3.childNodes);
+    
+    var idelemento4 = evt.parentNode.parentNode.childNodes;
+
+    //$(idelemento4).css("background-color", "lightgray");
+
+   
+
+    for (var i = 0; i < idelemento4.length-2; i++) {
+        var auxC = idelemento4[i].textContent;
+        $(idelemento4[i]).empty();
+        $(idelemento4[i]).append("<input type='text' class='form-control input-sm' value='" + auxC + "' placeholder='" + auxC + "' </ input>");
+    }
+
+    $(evt).css("display", "none");
+
+   
+
+};
+
+var confirmarDatos = function() {
+    console.log("confirmarDatos");
+};
+
 (function() {
     leer();
     $("#guardar").click(function () {
-        alert(".......")
         escribirDatos();
+        $('#cerrar').click();
     });
 
 })();
