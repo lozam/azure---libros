@@ -1,8 +1,10 @@
 ﻿var url = "https://alumnos-mcsd2014.azure-mobile.net/tables/libros";
 
-var leer = function () {
+var leer = function (odata) {
+    //condition ? instructionIfTrue : instructionIfFalse;
+    var myUrl = odata ? odata : url;
 
-    $.ajax(url, {
+    $.ajax(myUrl, {
         method: "GET",
         contentType: "application/json",
         crossDomain: true,
@@ -72,7 +74,7 @@ var borrar = function (evt) {
 
 // api odata de azure mobile -->  $filter=substringof('texto', campo)
 
-//este método añade datos ala tabla de la bbdd de azure
+//este método añade datos a la tabla de la bbdd de azure
 var escribirDatos = function () {
     var urlFinal = url;
 
@@ -102,7 +104,6 @@ var escribirDatos = function () {
     var jsonText = JSON.stringify(json);
     ajax.send(jsonText);
 };
-
 
 var editar = function (boton) {
 var idelemento = boton.getAttribute("data-editar");
@@ -163,37 +164,72 @@ var confirmarDatos = function(boton) {
     ajax.send(jsonText);
 };
 
+var masVendidos = function () {
+    var ranking = "";
+    var urlodata = "https://alumnos-mcsd2014.azure-mobile.net/tables/libros?$select=titulo,unidades&$orderby=unidades desc&$top=3";
+    $.ajax(urlodata, {
+        method: "GET",
+        contentType: "application/json",
+        crossDomain: true,
+        datatype: "json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("header", "valor");
+        },
+        success: function (xhr) {
+            ranking = xhr;
+            var saltoLinea = 0;
+            $.each(ranking, function (x, dato) {
+                ctx.fillText("", 1, 1);
 
-//var editar = function (evt) {
+                var sizeText = parseInt(3 - x + "0");
+                ctx.font = sizeText + "px calibri";
+                saltoLinea += sizeText;
+                var xx = c.width / 2;
+                var yy = c.height / 2;
+                ctx.fillText(dato.titulo, xx, saltoLinea);
 
-//    //escribirDatos();
+            });
 
-//    var idelemento = evt.getAttribute("data-editar");
+        },
+        error: function (err) {
+            alert(err);
 
-//    $("#" + idelemento).css("display", "block");
+        }
+    });
 
-//    var idelemento4 = evt.parentNode.parentNode.childNodes;
-//    //leer();
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0, c.width, c.height);
+    ctx.fillStyle = 'blue';
+    ctx.textAlign = 'center';
+};
 
-//    console.log(idelemento4);
-//    $(idelemento4).css("background-color", "lightgray");
-//    console.log(idelemento4.childNodes);
-  
-//    for (var i = 0; i < idelemento4.length-2; i++) {
-//        var auxC = idelemento4[i].textContent;
-//        $(idelemento4[i]).empty();
-//        $(idelemento4[i]).append("<input type='text' class='form-control input-sm' value='" + auxC + "' placeholder='" + auxC + "' </ input>");
-//    }
+var buscador = function() {
+    var txtBuscar = $("#txtBuscar").val();
+    var btnBuscar = $("#btnBuscar").val();
+    var radioOptions = $("[name*='radioOptions']:checked").attr("id");
+    var urlodata = "https://alumnos-mcsd2014.azure-mobile.net/tables/libros?$filter=substringof('" + txtBuscar + "', " + radioOptions + ")";
+    leer(urlodata);
+    console.log(urlodata);
+};
 
-//    $(evt).css("display", "none");
+(function () {
 
-//};
-
-(function() {
     leer();
     $("#guardar").click(function () {
         escribirDatos();
         $('#cerrar').click();
     });
 
+    $("#masVendidos").click(function () {
+        masVendidos();
+    });
+
+    $("#btnBuscar").click(function () {
+        buscador();
+    });
+
+    $("#recargarTabla").click(function () {
+        leer(url);
+    });
 })();
